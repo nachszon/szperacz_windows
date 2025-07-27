@@ -1,15 +1,21 @@
-# szperacz_windows.ps1 - dla Windows
+# szperacz_win_GUI.ps1 - dla Windows
 # Krzysztof Lipa-Izdebski, Lipiec 2025
-# 
-# Przed uruchomieniem pliku z powłoki wykonaj:
-# Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-# 
-# Skrypt szuka wartości konta w plikach tekstowych
+
+# Skrypt szuka wartości konta (tak naprawdę stringu) w plikach tekstowych
 # Ignoruje .git, *.log, *.bak) - o ile tego chcesz - tam jest taki haczyk do odznaczenia :)
 
 # Uwaga: raczej nie wskazuj do przeszukania całego dysku np D:/
-# GUI daje taką możliwość, ale to słaby pomysł, naprawdę :)
+# GUI daje taką możliwość i da się to zrobić, ale to słaby pomysł, naprawdę :)
 
+# Jeżli otrzymałeś tyen kod w pliku szperacz_win_GUI.txt
+# to: 
+# 1) zamień nazwę pliku na szperacz_win_GUI.ps1
+# 2) Uruchom powłokę poweshell i wykonaj:
+# Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+# 3) Przejdź do katalogu, w którym umieściłeś skrypt i wykonaj:
+# ./szperacz_win_GUI.ps1
+
+#STARTUJEMY! :)
 Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName System.Windows.Forms
 
@@ -151,3 +157,5 @@ $closeBtn.Add_Click({ $window.Close() })
 
 # ==== START GUI ====
 $window.ShowDialog() | Out-Null
+
+#I KONIEC :)
