@@ -1,5 +1,5 @@
 # szperacz_win_GUI.ps1 - dla Windows
-# Version: 1.0.2
+# Version: 1.0.4
 # Krzysztof Lipa-Izdebski, Lipiec 2025
 
 # Skrypt szuka wartości konta (tak naprawdę stringu) w plikach tekstowych
