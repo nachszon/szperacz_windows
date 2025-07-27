@@ -1,4 +1,5 @@
 # szperacz_win_GUI.ps1 - dla Windows
+# Version: 1.0.2
 # Krzysztof Lipa-Izdebski, Lipiec 2025
 
 # Skrypt szuka wartości konta (tak naprawdę stringu) w plikach tekstowych
@@ -20,28 +21,84 @@ Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName System.Windows.Forms
 
 # ==== SPLASH SCREEN ====
+# szperacz_win_GUI.ps1 - dla Windows
+# Krzysztof Lipa-Izdebski, Lipiec 2025
+
+# Skrypt szuka wartości konta (tak naprawdę stringu) w plikach tekstowych
+# Ignoruje .git, *.log, *.bak) - o ile tego chcesz - tam jest taki haczyk do odznaczenia :)
+
+# Uwaga: raczej nie wskazuj do przeszukania całego dysku np D:/
+# GUI daje taką możliwość i da się to zrobić, ale to słaby pomysł, naprawdę :)
+
+# Jeżeli otrzymałeś ten kod w pliku szperacz_win_GUI.txt
+# to: 
+# 1) zamień nazwę pliku na szperacz_win_GUI.ps1
+# 2) Uruchom powłokę PowerShell i wykonaj:
+# Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+# 3) Przejdź do katalogu, w którym umieściłeś skrypt i wykonaj:
+# ./szperacz_win_GUI.ps1
+
+#STARTUJEMY! :)
+Add-Type -AssemblyName PresentationFramework
+Add-Type -AssemblyName System.Windows.Forms
+
+# ==== SPLASH SCREEN ====
 $splash = New-Object Windows.Window
 $splash.WindowStyle = 'None'
 $splash.ResizeMode = 'NoResize'
 $splash.WindowStartupLocation = 'CenterScreen'
 $splash.Width = 300
-$splash.Height = 120
+$splash.Height = 150
 $splash.Topmost = $true
+
+$gradient = New-Object System.Windows.Media.LinearGradientBrush
+$gradient.StartPoint = New-Object System.Windows.Point(0,0)
+$gradient.EndPoint   = New-Object System.Windows.Point(0,1)
+
+$stop1 = New-Object System.Windows.Media.GradientStop
+$stop1.Color = [System.Windows.Media.Color]::FromRgb(200, 220, 255)
+$stop1.Offset = 0.0
+
+$stop2 = New-Object System.Windows.Media.GradientStop
+$stop2.Color = [System.Windows.Media.Colors]::White
+$stop2.Offset = 1.0
+
+$gradient.GradientStops.Add($stop1) | Out-Null
+$gradient.GradientStops.Add($stop2) | Out-Null
+$splash.Background = $gradient
 
 $panel = New-Object Windows.Controls.StackPanel
 $panel.HorizontalAlignment = 'Center'
 $panel.VerticalAlignment = 'Center'
 
-$text = New-Object Windows.Controls.TextBlock
-$text.Text = "Szperacz - GUI startuje..."
-$text.FontSize = 16
-$text.Margin = '0,20,0,0'
-$text.HorizontalAlignment = 'Center'
-$panel.Children.Add($text) | Out-Null
+$title = New-Object Windows.Controls.TextBlock
+$title.Text = "Szperacz - GUI"
+$title.FontSize = 20
+$title.FontWeight = 'Bold'
+$title.Margin = '0,0,0,10'
+$title.HorizontalAlignment = 'Center'
+
+$subtitle = New-Object Windows.Controls.TextBlock
+$subtitle.Text = "Ladowanie interfejsu..."
+$subtitle.FontSize = 14
+$subtitle.HorizontalAlignment = 'Center'
+
+$author = New-Object Windows.Controls.TextBlock
+$author.Text = "Author: Krzysztof Lipa-Izdebski"
+$author.FontSize = 9
+$author.Foreground = 'DarkGray'
+$author.HorizontalAlignment = 'Center'
+$author.Margin = '0,20,0,0'
+
+$panel.Children.Add($title) | Out-Null
+$panel.Children.Add($subtitle)| Out-Null
+$panel.Children.Add($author)| Out-Null
+
 $splash.Content = $panel
 $splash.Show()
-Start-Sleep -Seconds 1.5
+Start-Sleep -Seconds 2
 $splash.Close()
+
 
 # ==== XAML UI ====
 $xaml = @"
